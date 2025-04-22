@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.6.40">
+<meta name="generator" content="quarto-1.6.43">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -71,10 +71,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-974e931fc677b4491de43dc9219a33ec.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-85bb7f42227432af394d0457e576f044.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-bde82408f62f05fe072dcba944330ca3.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-0618fde5cdcd6932fd220ecef8829324.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -319,7 +319,7 @@ Disclaimer
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>sf<span class="sc">::</span><span class="fu">gdal_utils</span>(<span class="st">"info"</span>, <span class="fu">unlist</span>(sds)[[<span class="dv">30</span>L]])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Driver: netCDF/Network Common Data Format
-Files: /media/LaCie16TB/work/projects/documentation/read_rs_product/data/AMSR_U2_L3_SeaIce12km_B04_20140314.he5
+Files: /home/runner/work/r-spatial-cookbook/r-spatial-cookbook/data/AMSR_U2_L3_SeaIce12km_B04_20140314.he5
 Size is 608, 896
 Metadata:
   /HDFEOS INFORMATION/NC_GLOBAL#HDFEOSVersion=HDFEOS_5.1.15
@@ -334,16 +334,16 @@ Metadata:
   NC_GLOBAL#source=satellite observation
   NC_GLOBAL#title=AMSR-E/AMSR2 Unified L3 Daily 12.5 km Brightness Temperatures, Sea Ice Concentration, Motion &amp; Snow Depth Polar Grids
 Geolocation:
-  SRS=GEOGCS["WGS 84",DATUM["WGS_1984",SPHEROID["WGS 84",6378137,298.257223563,AUTHORITY["EPSG","7030"]],AUTHORITY["EPSG","6326"]],PRIMEM["Greenwich",0,AUTHORITY["EPSG","8901"]],UNIT["degree",0.0174532925199433,AUTHORITY["EPSG","9122"]],AXIS["Latitude",NORTH],AXIS["Longitude",EAST],AUTHORITY["EPSG","4326"]]
-  X_DATASET=NETCDF:"/media/LaCie16TB/work/projects/documentation/read_rs_product/data/AMSR_U2_L3_SeaIce12km_B04_20140314.he5":/HDFEOS/GRIDS/NpPolarGrid12km/lon
-  X_BAND=1
-  Y_DATASET=NETCDF:"/media/LaCie16TB/work/projects/documentation/read_rs_product/data/AMSR_U2_L3_SeaIce12km_B04_20140314.he5":/HDFEOS/GRIDS/NpPolarGrid12km/lat
-  Y_BAND=1
-  PIXEL_OFFSET=0
-  PIXEL_STEP=1
+  GEOREFERENCING_CONVENTION=PIXEL_CENTER
   LINE_OFFSET=0
   LINE_STEP=1
-  GEOREFERENCING_CONVENTION=PIXEL_CENTER
+  PIXEL_OFFSET=0
+  PIXEL_STEP=1
+  SRS=GEOGCS["WGS 84",DATUM["WGS_1984",SPHEROID["WGS 84",6378137,298.257223563,AUTHORITY["EPSG","7030"]],AUTHORITY["EPSG","6326"]],PRIMEM["Greenwich",0,AUTHORITY["EPSG","8901"]],UNIT["degree",0.0174532925199433,AUTHORITY["EPSG","9122"]],AXIS["Latitude",NORTH],AXIS["Longitude",EAST],AUTHORITY["EPSG","4326"]]
+  X_BAND=1
+  X_DATASET=NETCDF:"/home/runner/work/r-spatial-cookbook/r-spatial-cookbook/data/AMSR_U2_L3_SeaIce12km_B04_20140314.he5":/HDFEOS/GRIDS/NpPolarGrid12km/lon
+  Y_BAND=1
+  Y_DATASET=NETCDF:"/home/runner/work/r-spatial-cookbook/r-spatial-cookbook/data/AMSR_U2_L3_SeaIce12km_B04_20140314.he5":/HDFEOS/GRIDS/NpPolarGrid12km/lat
 Corner Coordinates:
 Upper Left  (    0.0,    0.0)
 Lower Left  (    0.0,  896.0)
@@ -353,11 +353,11 @@ Center      (  304.0,  448.0)
 Band 1 Block=608x1 Type=Int32, ColorInterp=Undefined
   Unit Type: percent
   Metadata:
-    NETCDF_VARNAME=SI_12km_NH_ICECON_DAY
+    comment=data value meaning: 0 -- Open Water, 110 -- missing/not calculated, 120 -- Land
     coordinates=lon lat
     long_name=Sea ice concentration daily average
-    units=percent
-    comment=data value meaning: 0 -- Open Water, 110 -- missing/not calculated, 120 -- Land</code></pre>
+    NETCDF_VARNAME=SI_12km_NH_ICECON_DAY
+    units=percent</code></pre>
 </div>
 </div>
 <p>The data needs to be transformed to a standard coordinate reference system (CRS). EPSG:3411 (NSIDC Sea Ice Polar Stereographic North) is commonly used for Northern Hemisphere sea ice data. The <code>gdal_utils()</code> function warps the data to this CRS and saves it to a temporary VRT (Virtual Raster) file. VRT files are useful because they act as a pointer to the original data without duplicating it, and allow for on-the-fly transformations.</p>
@@ -413,7 +413,7 @@ Warning
 <div class="cell">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="ex">gdalinfo</span> <span class="at">--version</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>GDAL 3.10.1, released 2025/01/08 (debug build)</code></pre>
+<pre><code>GDAL 3.8.4, released 2024/02/08</code></pre>
 </div>
 </div>
 <p>If you have a recent version of <code>gdal</code>, you read the data directly from the HE5 file with the <code>terra</code> package.</p>
@@ -428,7 +428,7 @@ Warning
 <col style="width: 0%">
 <col style="width: 50%">
 <col style="width: 18%">
-<col style="width: 25%">
+<col style="width: 26%">
 <col style="width: 1%">
 <col style="width: 1%">
 <col style="width: 1%">
@@ -447,7 +447,7 @@ Warning
 <tbody>
 <tr class="odd">
 <td style="text-align: right;">1</td>
-<td style="text-align: left;">HDF5:“/media/LaCie16TB/work/projects/documentation/read_rs_product/data/AMSR_U2_L3_SeaIce12km_B04_20140314.he5”://HDFEOS/GRIDS/NpPolarGrid12km/Data_Fields/SI_12km_NH_18H_ASC</td>
+<td style="text-align: left;">HDF5:“/home/runner/work/r-spatial-cookbook/r-spatial-cookbook/data/AMSR_U2_L3_SeaIce12km_B04_20140314.he5”://HDFEOS/GRIDS/NpPolarGrid12km/Data_Fields/SI_12km_NH_18H_ASC</td>
 <td style="text-align: left;">//HDFEOS/GRIDS/NpPolarGrid12km/Data_Fields/SI_12km_NH_18H_ASC</td>
 <td style="text-align: left;">[896x608] //HDFEOS/GRIDS/NpPolarGrid12km/Data_Fields/SI_12km_NH_18H_ASC (32-bit integer)</td>
 <td style="text-align: right;">896</td>
@@ -456,7 +456,7 @@ Warning
 </tr>
 <tr class="even">
 <td style="text-align: right;">2</td>
-<td style="text-align: left;">HDF5:“/media/LaCie16TB/work/projects/documentation/read_rs_product/data/AMSR_U2_L3_SeaIce12km_B04_20140314.he5”://HDFEOS/GRIDS/NpPolarGrid12km/Data_Fields/SI_12km_NH_18H_DAY</td>
+<td style="text-align: left;">HDF5:“/home/runner/work/r-spatial-cookbook/r-spatial-cookbook/data/AMSR_U2_L3_SeaIce12km_B04_20140314.he5”://HDFEOS/GRIDS/NpPolarGrid12km/Data_Fields/SI_12km_NH_18H_DAY</td>
 <td style="text-align: left;">//HDFEOS/GRIDS/NpPolarGrid12km/Data_Fields/SI_12km_NH_18H_DAY</td>
 <td style="text-align: left;">[896x608] //HDFEOS/GRIDS/NpPolarGrid12km/Data_Fields/SI_12km_NH_18H_DAY (32-bit integer)</td>
 <td style="text-align: right;">896</td>
@@ -465,7 +465,7 @@ Warning
 </tr>
 <tr class="odd">
 <td style="text-align: right;">3</td>
-<td style="text-align: left;">HDF5:“/media/LaCie16TB/work/projects/documentation/read_rs_product/data/AMSR_U2_L3_SeaIce12km_B04_20140314.he5”://HDFEOS/GRIDS/NpPolarGrid12km/Data_Fields/SI_12km_NH_18H_DSC</td>
+<td style="text-align: left;">HDF5:“/home/runner/work/r-spatial-cookbook/r-spatial-cookbook/data/AMSR_U2_L3_SeaIce12km_B04_20140314.he5”://HDFEOS/GRIDS/NpPolarGrid12km/Data_Fields/SI_12km_NH_18H_DSC</td>
 <td style="text-align: left;">//HDFEOS/GRIDS/NpPolarGrid12km/Data_Fields/SI_12km_NH_18H_DSC</td>
 <td style="text-align: left;">[896x608] //HDFEOS/GRIDS/NpPolarGrid12km/Data_Fields/SI_12km_NH_18H_DSC (32-bit integer)</td>
 <td style="text-align: right;">896</td>
@@ -474,7 +474,7 @@ Warning
 </tr>
 <tr class="even">
 <td style="text-align: right;">4</td>
-<td style="text-align: left;">HDF5:“/media/LaCie16TB/work/projects/documentation/read_rs_product/data/AMSR_U2_L3_SeaIce12km_B04_20140314.he5”://HDFEOS/GRIDS/NpPolarGrid12km/Data_Fields/SI_12km_NH_18V_ASC</td>
+<td style="text-align: left;">HDF5:“/home/runner/work/r-spatial-cookbook/r-spatial-cookbook/data/AMSR_U2_L3_SeaIce12km_B04_20140314.he5”://HDFEOS/GRIDS/NpPolarGrid12km/Data_Fields/SI_12km_NH_18V_ASC</td>
 <td style="text-align: left;">//HDFEOS/GRIDS/NpPolarGrid12km/Data_Fields/SI_12km_NH_18V_ASC</td>
 <td style="text-align: left;">[896x608] //HDFEOS/GRIDS/NpPolarGrid12km/Data_Fields/SI_12km_NH_18V_ASC (32-bit integer)</td>
 <td style="text-align: right;">896</td>
@@ -483,7 +483,7 @@ Warning
 </tr>
 <tr class="odd">
 <td style="text-align: right;">5</td>
-<td style="text-align: left;">HDF5:“/media/LaCie16TB/work/projects/documentation/read_rs_product/data/AMSR_U2_L3_SeaIce12km_B04_20140314.he5”://HDFEOS/GRIDS/NpPolarGrid12km/Data_Fields/SI_12km_NH_18V_DAY</td>
+<td style="text-align: left;">HDF5:“/home/runner/work/r-spatial-cookbook/r-spatial-cookbook/data/AMSR_U2_L3_SeaIce12km_B04_20140314.he5”://HDFEOS/GRIDS/NpPolarGrid12km/Data_Fields/SI_12km_NH_18V_DAY</td>
 <td style="text-align: left;">//HDFEOS/GRIDS/NpPolarGrid12km/Data_Fields/SI_12km_NH_18V_DAY</td>
 <td style="text-align: left;">[896x608] //HDFEOS/GRIDS/NpPolarGrid12km/Data_Fields/SI_12km_NH_18V_DAY (32-bit integer)</td>
 <td style="text-align: right;">896</td>
@@ -492,7 +492,7 @@ Warning
 </tr>
 <tr class="even">
 <td style="text-align: right;">6</td>
-<td style="text-align: left;">HDF5:“/media/LaCie16TB/work/projects/documentation/read_rs_product/data/AMSR_U2_L3_SeaIce12km_B04_20140314.he5”://HDFEOS/GRIDS/NpPolarGrid12km/Data_Fields/SI_12km_NH_18V_DSC</td>
+<td style="text-align: left;">HDF5:“/home/runner/work/r-spatial-cookbook/r-spatial-cookbook/data/AMSR_U2_L3_SeaIce12km_B04_20140314.he5”://HDFEOS/GRIDS/NpPolarGrid12km/Data_Fields/SI_12km_NH_18V_DSC</td>
 <td style="text-align: left;">//HDFEOS/GRIDS/NpPolarGrid12km/Data_Fields/SI_12km_NH_18V_DSC</td>
 <td style="text-align: left;">[896x608] //HDFEOS/GRIDS/NpPolarGrid12km/Data_Fields/SI_12km_NH_18V_DSC (32-bit integer)</td>
 <td style="text-align: right;">896</td>
@@ -503,9 +503,13 @@ Warning
 </table>
 </div>
 </div>
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>layer <span class="ot">&lt;-</span> var_names[[<span class="st">"var"</span>]][<span class="fu">grepl</span>(<span class="st">"SI_12km_NH_ICECON_DAY"</span>, var_names[[<span class="st">"var"</span>]], <span class="at">fixed =</span> <span class="cn">TRUE</span>)]</span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>layer</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>layer <span class="ot">&lt;-</span> var_names[[<span class="st">"var"</span>]][<span class="fu">grepl</span>(</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">"SI_12km_NH_ICECON_DAY"</span>,</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  var_names[[<span class="st">"var"</span>]],</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">fixed =</span> <span class="cn">TRUE</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>)]</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>layer</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "//HDFEOS/GRIDS/NpPolarGrid12km/Data_Fields/SI_12km_NH_ICECON_DAY"</code></pre>
 </div>
@@ -515,9 +519,9 @@ Warning
 <div class="cell-output cell-output-stdout">
 <pre><code>class       : SpatRaster 
 dimensions  : 896, 608, 1  (nrow, ncol, nlyr)
-resolution  : 12500, 12500  (x, y)
-extent      : -3850000, 3750000, -5350000, 5850000  (xmin, xmax, ymin, ymax)
-coord. ref. : +proj=stere +lat_0=90 +lat_ts=70 +lon_0=-45 +x_0=0 +y_0=0 +R=6378273 +units=m +no_defs 
+resolution  : 1, 1  (x, y)
+extent      : 0, 608, 0, 896  (xmin, xmax, ymin, ymax)
+coord. ref. :  
 source      : AMSR_U2_L3_SeaIce12km_B04_20140314.he5://SI_12km_NH_ICECON_DAY 
 varname     : SI_12km_NH_ICECON_DAY 
 name        : SI_12km_NH_ICECON_DAY </code></pre>
