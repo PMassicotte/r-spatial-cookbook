@@ -81,7 +81,11 @@ var_names <- describe(file, sds = TRUE)
 
 head(var_names)
 
-layer <- var_names[["var"]][grepl("SI_12km_NH_ICECON_DAY", var_names[["var"]], fixed = TRUE)]
+layer <- var_names[["var"]][grepl(
+  "SI_12km_NH_ICECON_DAY",
+  var_names[["var"]],
+  fixed = TRUE
+)]
 
 layer
 
