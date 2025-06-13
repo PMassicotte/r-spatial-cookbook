@@ -39,7 +39,7 @@ sf::gdal_utils("info", unlist(sds)[[30L]])
 The data needs to be transformed to a standard coordinate reference system (CRS). EPSG:3411 (NSIDC Sea Ice Polar Stereographic North) is commonly used for Northern Hemisphere sea ice data. The `gdal_utils()` function warps the data to this CRS and saves it to a temporary VRT (Virtual Raster) file. VRT files are useful because they act as a pointer to the original data without duplicating it, and allow for on-the-fly transformations.
 
 ```{r}
-dsn <- "/vsimem/temp.vrt"
+dsn <- tempfile(fileext = "vrt")
 
 sf::gdal_utils(
   "warp",
